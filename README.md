@@ -41,3 +41,4 @@ If that doesn't work, [come chat with us](https://gitter.im/ng-book/ng-book)!
 - `tslint.json` - `tslint` is a program and helps enforce rules about code style. The `tslint.json` is the config file that specifies conventions for this project.
 - `vendor` - for this project we're using [Semantic-UI](http://semantic-ui.com/) for the CSS. We've included the CSS files from Semantic here.
 - `resources` - this is where we store a few images
+"# angular2-reddit-base" 
