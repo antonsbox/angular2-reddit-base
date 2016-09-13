@@ -19,6 +19,14 @@ class Article {
         this.votes -= 1;
     }
 
+    domain(): string {
+        try {
+            const link: string = this.link.split('//')[1];
+            return link.split('/')[0];
+        } catch (err) {
+            return null;
+        }
+    }
 }
 
 @Component({
@@ -42,6 +50,7 @@ class Article {
             <a class="ui large header" href="{{article.link}}">
                 {{article.title}}
             </a>
+            <div class="meta">({{article.domain()}})</div>
             <ul class=" ui big horizontal list voters">
                 <li class="item">
                     <a href (click)="voteUp()">
@@ -99,7 +108,7 @@ class ArticleComponent {
             </button>             
         </form>
         <div class="ui grid posts">
-            <reddit-article *ngFor="let article of articles"[article]="article"></reddit-article>
+            <reddit-article *ngFor="let article of sortedArticles()"[article]="article"></reddit-article>
         </div>
         `
 })
@@ -120,6 +129,10 @@ class RedditApp {
         this.articles.push(new Article(title.value, link.value, 0));
         title.value = ' ';
         link.value = ' ';
+    }
+
+    sortedArticles(): Article[] {
+        return this.articles.sort((a: Article, b: Article)=>b.votes - a.votes);
     }
 }
 bootstrap(RedditApp);
